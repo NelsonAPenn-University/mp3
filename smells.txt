@@ -1,0 +1,5 @@
+~~~ Question 1 ~~~
+
+The code smell present in these two functions falls under "Duplicated Code".
+We can refactor this by splitting out repeated functionality into its own
+function.
