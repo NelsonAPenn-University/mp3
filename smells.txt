@@ -3,3 +3,10 @@
 The code smell present in these two functions falls under "Duplicated Code".
 We can refactor this by splitting out repeated functionality into its own
 function.
+
+~~~ Question 3 ~~~
+
+Because the 'updateAndTrim' function only calls functions on the Jenkins
+class, this is an example of feature envy. We can move this function
+into the Jenkins class itself.
+
