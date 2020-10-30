@@ -10,3 +10,6 @@ Because the 'updateAndTrim' function only calls functions on the Jenkins
 class, this is an example of feature envy. We can move this function
 into the Jenkins class itself.
 
+~~~ Question 4 ~~~
+
+This repeated code can easily be resolved by using a for loop, or using a substring (like I used in my modification).
