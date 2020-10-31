@@ -90,13 +90,9 @@ public class CronTabTest {
         compare(new GregorianCalendar(2010, 7, 1, 0, 0), x.ceil(c));
     }
 
-    /**
-     * Verifies that HUDSON-8656 never crops up again.
-     */
-    @Url("http://issues.hudson-ci.org/browse/HUDSON-8656")
-    @Test
-    public void testCeil4() throws ANTLRException {
-        final Calendar cal = Calendar.getInstance(new Locale("de", "de"));
+    private void testProblematicDateForLocale(Locale l) throws ANTLRException
+    {
+        final Calendar cal = Calendar.getInstance(l);
         cal.set(2011, 0, 16, 0, 0, 0); // Sunday, Jan 16th 2011, 00:00
         final String cronStr = "0 23 * * 1-5"; // execute on weekdays @23:00
 
@@ -117,21 +113,17 @@ public class CronTabTest {
      */
     @Url("http://issues.hudson-ci.org/browse/HUDSON-8656")
     @Test
+    public void testCeil4() throws ANTLRException {
+        testProblematicDateForLocale(new Locale("de", "de"));
+    }
+
+    /**
+     * Verifies that HUDSON-8656 never crops up again.
+     */
+    @Url("http://issues.hudson-ci.org/browse/HUDSON-8656")
+    @Test
     public void testCeil5() throws ANTLRException {
-        final Calendar cal = Calendar.getInstance(new Locale("de", "at"));
-        cal.set(2011, 0, 16, 0, 0, 0); // Sunday, Jan 16th 2011, 00:00
-        final String cronStr = "0 23 * * 1-5"; // execute on weekdays @23:00
-
-        final CronTab cron = new CronTab(cronStr);
-        final Calendar next = cron.ceil(cal);
-
-        final Calendar expectedDate = Calendar.getInstance();
-        expectedDate.set(2011, 0, 17, 23, 0, 0); // Expected next: Monday, Jan 17th 2011, 23:00
-        assertEquals(expectedDate.get(Calendar.HOUR), next.get(Calendar.HOUR));
-        assertEquals(expectedDate.get(Calendar.MINUTE), next.get(Calendar.MINUTE));
-        assertEquals(expectedDate.get(Calendar.YEAR), next.get(Calendar.YEAR));
-        assertEquals(expectedDate.get(Calendar.MONTH), next.get(Calendar.MONTH));
-        assertEquals(expectedDate.get(Calendar.DAY_OF_MONTH), next.get(Calendar.DAY_OF_MONTH)); // FAILS: is Monday, Jan 10th, 23:00
+        testProblematicDateForLocale(new Locale("de", "at"));
     }
 
     @Test

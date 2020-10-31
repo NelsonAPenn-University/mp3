@@ -13,3 +13,7 @@ into the Jenkins class itself.
 ~~~ Question 4 ~~~
 
 This repeated code can easily be resolved by using a for loop, or using a substring (like I used in my modification).
+
+~~~ Question 6 ~~~
+
+I chose a piece of repeated code found in 'hudson.scheduler.CronTabTest'. I resolved this by creating a new method and extracting the functionality into it.
